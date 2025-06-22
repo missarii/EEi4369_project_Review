@@ -1,0 +1,18 @@
+<resources>
+    <string-array name="user_type_array">
+        <item>Select user type</item>
+        <item>MOH Officer</item>
+        <item>Home Nurse</item>
+        <item>Mother</item>
+    </string-array>
+
+
+        <string-array name="user_roles">
+            <item>Select User Type</item>
+            <item>Mother</item>
+            <item>Home Nurse</item>
+            <item>MOH Officer</item>
+        </string-array>
+
+
+</resources>

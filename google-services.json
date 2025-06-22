@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "189546964324",
+    "project_id": "thiriposa",
+    "storage_bucket": "thiriposa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189546964324:android:a8cd4553b25b8f15368671",
+        "android_client_info": {
+          "package_name": "com.s23001792.thiriposa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApfG-zTx-1VPqWL6nyB7eOCF4wHeX_AjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <!-- Use a vertical LinearLayout to stack the two "containers" and the submit button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ======= Transparent Red Container for Mom's Details =======
+             (50% transparent red background) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#80FF0000"
+            android:alpha="0.8">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mother's Details"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:paddingBottom="8dp" />
+
+            <!-- Mother Name -->
+            <EditText
+                android:id="@+id/etMotherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mother Name"
+                android:inputType="textPersonName"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Mother Weight -->
+            <EditText
+                android:id="@+id/etMotherWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mother Weight (kg)"
+                android:inputType="numberDecimal"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Mother BMI -->
+            <EditText
+                android:id="@+id/etMotherBMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mother BMI"
+                android:inputType="numberDecimal"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <!-- ======= White Container for Baby's Details ======= -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Baby's Details"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:paddingBottom="8dp" />
+
+            <!-- Baby Name -->
+            <EditText
+                android:id="@+id/etBabyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Baby Name"
+                android:inputType="textPersonName"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Baby Height -->
+            <EditText
+                android:id="@+id/etBabyHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Baby Height (cm)"
+                android:inputType="numberDecimal"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Baby Weight -->
+            <EditText
+                android:id="@+id/etBabyWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Baby Weight (kg)"
+                android:inputType="numberDecimal"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <!-- ======= Submit Button ======= -->
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Data"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:padding="12dp" />
+
+    </LinearLayout>
+</ScrollView>

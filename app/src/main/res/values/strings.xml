@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">thiriposa</string>
+
+    <string-array name="user_types">
+        <item>MOH Officer</item>
+        <item>Mother</item>
+        <item>Home Nurse</item>
+    </string-array>
+    <string name="select_user_type">Select user type</string>
+
+
+</resources>

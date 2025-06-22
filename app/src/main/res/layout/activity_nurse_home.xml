@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background Image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/image_01"
+        android:scaleType="centerCrop"
+        android:alpha="0.8" />
+
+    <!-- Centered Content Container -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="18dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/dashboardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:background="@drawable/rounded_container"
+            android:elevation="4dp"
+            android:layout_marginTop="170dp"
+            android:gravity="center">
+
+            <!-- Welcome Message -->
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:padding="16dp"
+                android:gravity="center" />
+
+            <!-- Arrow + Image Row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center_vertical|center_horizontal">
+
+                <!-- Left Arrow -->
+                <ImageView
+                    android:id="@+id/leftArrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/left_arrow"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- Image + Label -->
+                <LinearLayout
+                    android:id="@+id/contentContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/contentImage"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mother_baby_mother" />
+
+                    <TextView
+                        android:id="@+id/contentLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Baby Name 1"
+                        android:textSize="18sp"
+                        android:textColor="#000" />
+                </LinearLayout>
+
+                <!-- Right Arrow -->
+                <ImageView
+                    android:id="@+id/rightArrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/right_arrow"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>
