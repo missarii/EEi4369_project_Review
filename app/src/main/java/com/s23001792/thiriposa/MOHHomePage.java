@@ -1,10 +1,12 @@
 package com.s23001792.thiriposa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,17 +22,14 @@ public class MOHHomePage extends AppCompatActivity {
     private TextView contentLabel;
     private int currentIndex = 0;
 
-    // Re-use exactly the same images and labels as NurseHomePage
     private final int[] imageResIds = {
-            R.drawable.mother_baby_mother,
-            R.drawable.bmi_update,
-            R.drawable.bicycle_ride
+            R.drawable.bmi_cycle,
+            R.drawable.thiriposa_delivery
     };
 
     private final String[] imageLabels = {
-            "Mom & B Baby Report",
-            "Clinical Report",
-            "Baby Name 3"
+            "Clinical BMI Details",
+            "Thiriposa Packet Delivery"
     };
 
     private FirebaseAuth mAuth;
@@ -41,25 +40,21 @@ public class MOHHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moh_home);
 
-        // Initialize Firebase Auth & DatabaseReference
         mAuth = FirebaseAuth.getInstance();
         dbRef = FirebaseDatabase.getInstance().getReference("users");
 
-        // Bind UI elements
         welcomeText  = findViewById(R.id.welcomeText);
         leftArrow    = findViewById(R.id.leftArrow);
         rightArrow   = findViewById(R.id.rightArrow);
         contentImage = findViewById(R.id.contentImage);
         contentLabel = findViewById(R.id.contentLabel);
 
-        // Start the same arrow‐pulse animation as NurseHomePage
         Animation pulse = AnimationUtils.loadAnimation(this, R.anim.arrow_pulse);
         pulse.setRepeatCount(Animation.INFINITE);
         pulse.setRepeatMode(Animation.REVERSE);
         leftArrow.startAnimation(pulse);
         rightArrow.startAnimation(pulse);
 
-        // Load the logged‐in user's “username” from Firebase (if available)
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String uid = currentUser.getUid();
@@ -77,32 +72,58 @@ public class MOHHomePage extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            // On error, fall back to a static greeting
                             welcomeText.setText("Welcome, MOH Officer");
                         }
                     });
         } else {
-            // No user logged in (fallback)
             welcomeText.setText("Welcome, MOH Officer");
         }
 
-        // Initialize slider content
         updateContentDisplay();
 
-        // Left‐arrow click: go to previous image
         leftArrow.setOnClickListener(v -> {
             currentIndex = (currentIndex - 1 + imageResIds.length) % imageResIds.length;
             updateContentDisplay();
         });
 
-        // Right‐arrow click: go to next image
         rightArrow.setOnClickListener(v -> {
             currentIndex = (currentIndex + 1) % imageResIds.length;
             updateContentDisplay();
         });
+
+        contentImage.setOnClickListener(v -> {
+            if (currentIndex == 0) {
+                Intent intent = new Intent(MOHHomePage.this, BmiData.class);
+                startActivity(intent);
+            } else if (currentIndex == 1) {
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("packetReports");
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String motherName = snapshot.child("motherName").getValue(String.class);
+                        String motherBmi = snapshot.child("motherBmi").getValue(String.class);
+                        String babyBmi = snapshot.child("babyBmi").getValue(String.class);
+                        String packetCount = snapshot.child("packetCount").getValue(String.class);
+                        String measuredMonth = snapshot.child("measuredMonth").getValue(String.class);
+
+                        Intent intent = new Intent(MOHHomePage.this, PacketReport.class);
+                        intent.putExtra("motherName", motherName != null ? motherName : "N/A");
+                        intent.putExtra("motherBmi", motherBmi != null ? motherBmi : "N/A");
+                        intent.putExtra("babyBmi", babyBmi != null ? babyBmi : "N/A");
+                        intent.putExtra("packetCount", packetCount != null ? packetCount : "N/A");
+                        intent.putExtra("measuredMonth", measuredMonth != null ? measuredMonth : "N/A");
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Error handling if needed
+                    }
+                });
+            }
+        });
     }
 
-    // Helper method to update the ImageView and Label
     private void updateContentDisplay() {
         contentImage.setImageResource(imageResIds[currentIndex]);
         contentLabel.setText(imageLabels[currentIndex]);

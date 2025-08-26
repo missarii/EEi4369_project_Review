@@ -54,7 +54,34 @@ public class AppointmentSendActivity extends AppCompatActivity {
         submitButton  = findViewById(R.id.submitButton);
 
         // 1) Setup the “Booking Centre” Spinner (static list)
-        String[] centres = {"Ampara", "Kandy", "Anuradhapura", "Colombo", "Batticaloa"};
+        String[] centres = {
+                "Ampara",
+                "Anuradhapura",
+                "Badulla",
+                "Batticaloa",
+                "Colombo",
+                "Galle",
+                "Gampaha",
+                "Hambantota",
+                "Jaffna",
+                "Kalutara",
+                "Kandy",
+                "Kegalle",
+                "Kilinochchi",
+                "Kurunegala",
+                "Mannar",
+                "Matale",
+                "Matara",
+                "Monaragala",
+                "Mullaitivu",
+                "Nuwara Eliya",
+                "Polonnaruwa",
+                "Puttalam",
+                "Ratnapura",
+                "Trincomalee",
+                "Vavuniya"
+        };
+
         ArrayAdapter<String> centreAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,

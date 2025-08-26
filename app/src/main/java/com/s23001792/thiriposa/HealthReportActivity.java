@@ -1,12 +1,11 @@
-// File: app/src/main/java/com/s23001792/thiriposa/HealthReportActivity.java
 package com.s23001792.thiriposa;
 
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.ViewGroup;             // already present
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;           // already present
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,7 @@ public class HealthReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_health_report);
 
         tableLayout = findViewById(R.id.tableLayout);
+
         // Reference the same “healthUpdates/latest” node we wrote to
         dbRef = FirebaseDatabase.getInstance()
                 .getReference("healthUpdates")
@@ -49,29 +49,33 @@ public class HealthReportActivity extends AppCompatActivity {
                 // Clear any existing rows
                 tableLayout.removeAllViews();
 
-                // Add a header row (optional)
+                // Add a header row
                 TableRow headerRow = new TableRow(HealthReportActivity.this);
+
                 TextView header1 = new TextView(HealthReportActivity.this);
                 header1.setText("Field");
-                header1.setTextAppearance(android.R.style.TextAppearance_Medium);
+                header1.setTextSize(20); // Header font size
                 header1.setPadding(8, 8, 8, 8);
+                header1.setGravity(Gravity.START);
+
                 TextView header2 = new TextView(HealthReportActivity.this);
                 header2.setText("Value");
-                header2.setTextAppearance(android.R.style.TextAppearance_Medium);
+                header2.setTextSize(20); // Header font size
                 header2.setPadding(8, 8, 8, 8);
+                header2.setGravity(Gravity.START);
+
                 headerRow.addView(header1);
                 headerRow.addView(header2);
                 tableLayout.addView(headerRow);
 
-                // Add a simple divider (optional)
-                // Changed from "View divider" to "TextView divider" so we don't need to import android.view.View
+                // Add a simple divider
                 TextView divider = new TextView(HealthReportActivity.this);
                 divider.setLayoutParams(new TableRow.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, 2));
                 divider.setBackgroundColor(0xFFCCCCCC);
                 tableLayout.addView(divider);
 
-                // Create rows for each piece of data
+                // Add data rows
                 addRow("Mother Name", data.getMotherName());
                 addRow("Mother Weight", data.getMotherWeight());
                 addRow("Mother BMI", data.getMotherBMI());
@@ -104,11 +108,13 @@ public class HealthReportActivity extends AppCompatActivity {
         tvField.setText(fieldName);
         tvField.setPadding(8, 16, 16, 16);
         tvField.setGravity(Gravity.START);
+        tvField.setTextSize(18); // Set table data font size
 
         TextView tvValue = new TextView(this);
         tvValue.setText(value);
         tvValue.setPadding(8, 16, 16, 16);
         tvValue.setGravity(Gravity.START);
+        tvValue.setTextSize(18); // Set table data font size
 
         row.addView(tvField);
         row.addView(tvValue);

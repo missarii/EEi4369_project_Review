@@ -31,60 +31,55 @@ public class AppointmentReceiveActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableLayout);
         appointmentRef = FirebaseDatabase.getInstance().getReference("appointment_send");
 
-        // 1) Build and add the header row
         addTableHeader();
-
-        // 2) Load all appointment_send entries and add them as colored rows
         loadAllAppointments();
     }
 
-    /**
-     * Add a header row to the TableLayout with bolded column titles
-     * and a solid background color.
-     */
+    // Header row
     private void addTableHeader() {
         TableRow headerRow = new TableRow(this);
         headerRow.setPadding(0, 8, 0, 8);
         headerRow.setBackgroundColor(Color.parseColor("#3F51B5")); // Indigo header
 
         String[] headers = {"Centre", "Nurse", "Mother", "Baby"};
-        for (String header : headers) {
+        float[] columnWeights = {1f, 1.5f, 1f, 1f}; // Nurse slightly wider
+
+        for (int i = 0; i < headers.length; i++) {
             TextView tv = new TextView(this);
-            tv.setText(header);
+            tv.setText(headers[i]);
             tv.setTextColor(Color.WHITE);
             tv.setTypeface(Typeface.DEFAULT_BOLD);
             tv.setPadding(24, 12, 24, 12);
             tv.setGravity(Gravity.CENTER);
+
+            TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, columnWeights[i]);
+            tv.setLayoutParams(params);
+
             headerRow.addView(tv);
         }
 
         tableLayout.addView(headerRow);
     }
 
-    /**
-     * Query Firebase, iterate all children under "appointment_send", and add each
-     * as a new TableRow with alternating background colors.
-     */
+    // Load appointment rows
     private void loadAllAppointments() {
         appointmentRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists() || !snapshot.hasChildren()) {
-                    Toast.makeText(
-                            AppointmentReceiveActivity.this,
+                    Toast.makeText(AppointmentReceiveActivity.this,
                             "No appointment requests found.",
-                            Toast.LENGTH_LONG
-                    ).show();
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 int rowIndex = 0;
+                float[] columnWeights = {1f, 1.5f, 1f, 1f}; // Same as header
+
                 for (DataSnapshot appointmentSnap : snapshot.getChildren()) {
-                    // 1) Read each field (falling back if null)
                     String centre = appointmentSnap.child("centre").getValue(String.class);
                     if (centre == null) centre = "—";
 
-                    // Try "nurseUsername" first. If absent, fall back to "nurseName", then "nurseEmail".
                     String nurseName = appointmentSnap.child("nurseUsername").getValue(String.class);
                     if (nurseName == null || nurseName.trim().isEmpty()) {
                         nurseName = appointmentSnap.child("nurseName").getValue(String.class);
@@ -102,47 +97,28 @@ public class AppointmentReceiveActivity extends AppCompatActivity {
                     String babyName = appointmentSnap.child("babyName").getValue(String.class);
                     if (babyName == null) babyName = "—";
 
-                    // 2) Create a new row for this appointment
                     TableRow row = new TableRow(AppointmentReceiveActivity.this);
                     row.setPadding(0, 4, 0, 4);
 
-                    // Alternate row color: even rows = white, odd rows = light gray
                     int backgroundColor = (rowIndex % 2 == 0)
-                            ? Color.parseColor("#FFFFFF")   // white
-                            : Color.parseColor("#F0F0F0");  // light gray
+                            ? Color.parseColor("#FFFFFF")
+                            : Color.parseColor("#F0F0F0");
                     row.setBackgroundColor(backgroundColor);
 
-                    // Centre cell
-                    TextView centreTv = new TextView(AppointmentReceiveActivity.this);
-                    centreTv.setText(centre);
-                    centreTv.setTextColor(Color.BLACK);
-                    centreTv.setPadding(24, 12, 24, 12);
-                    centreTv.setGravity(Gravity.CENTER);
-                    row.addView(centreTv);
+                    String[] values = {centre, nurseName, motherName, babyName};
 
-                    // Nurse cell
-                    TextView nurseTv = new TextView(AppointmentReceiveActivity.this);
-                    nurseTv.setText(nurseName);
-                    nurseTv.setTextColor(Color.BLACK);
-                    nurseTv.setPadding(24, 12, 24, 12);
-                    nurseTv.setGravity(Gravity.CENTER);
-                    row.addView(nurseTv);
+                    for (int i = 0; i < values.length; i++) {
+                        TextView tv = new TextView(AppointmentReceiveActivity.this);
+                        tv.setText(values[i]);
+                        tv.setTextColor(Color.BLACK);
+                        tv.setPadding(24, 12, 24, 12);
+                        tv.setGravity(Gravity.CENTER);
 
-                    // Mother cell
-                    TextView motherTv = new TextView(AppointmentReceiveActivity.this);
-                    motherTv.setText(motherName);
-                    motherTv.setTextColor(Color.BLACK);
-                    motherTv.setPadding(24, 12, 24, 12);
-                    motherTv.setGravity(Gravity.CENTER);
-                    row.addView(motherTv);
+                        TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, columnWeights[i]);
+                        tv.setLayoutParams(params);
 
-                    // Baby cell
-                    TextView babyTv = new TextView(AppointmentReceiveActivity.this);
-                    babyTv.setText(babyName);
-                    babyTv.setTextColor(Color.BLACK);
-                    babyTv.setPadding(24, 12, 24, 12);
-                    babyTv.setGravity(Gravity.CENTER);
-                    row.addView(babyTv);
+                        row.addView(tv);
+                    }
 
                     tableLayout.addView(row);
                     rowIndex++;
@@ -151,11 +127,9 @@ public class AppointmentReceiveActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(
-                        AppointmentReceiveActivity.this,
+                Toast.makeText(AppointmentReceiveActivity.this,
                         "Failed to load appointments: " + error.getMessage(),
-                        Toast.LENGTH_LONG
-                ).show();
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

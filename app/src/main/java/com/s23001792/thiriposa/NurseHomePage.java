@@ -26,13 +26,13 @@ public class NurseHomePage extends AppCompatActivity {
     private final int[] imageResIds = {
             R.drawable.mom_boy1,         // Index 0: taps -> HealthUpdateActivity
             R.drawable.appoint_receive,   // Index 1: taps -> AppointmentReceiveActivity
-            R.drawable.bicycle_ride
+            R.drawable.thiriposa_packet
     };
 
     private final String[] imageLabels = {
-            "Mom & B Baby Health Update",
+            "Mom & Baby Health Update",
             "Appointment Pending",
-            "Baby Name 3"
+            "Thiriposa Packet Update"
     };
 
     private FirebaseAuth mAuth;
@@ -100,16 +100,17 @@ public class NurseHomePage extends AppCompatActivity {
         // If user taps the central image:
         contentImage.setOnClickListener(v -> {
             if (currentIndex == 0) {
-                // Index 0: “Mom & B Baby Health Update” -> HealthUpdateActivity
                 Intent intent = new Intent(NurseHomePage.this, HealthUpdateActivity.class);
                 startActivity(intent);
             } else if (currentIndex == 1) {
-                // Index 1: Appointment Pending
                 Intent intent = new Intent(NurseHomePage.this, AppointmentReceiveActivity.class);
                 startActivity(intent);
+            } else if (currentIndex == 2) {
+                Intent intent = new Intent(NurseHomePage.this, PacketUpdate.class);
+                startActivity(intent);
             }
-            // Else (index 2): no action or future feature
         });
+
     }
 
     private void updateContentDisplay() {

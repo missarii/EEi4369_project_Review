@@ -50,10 +50,13 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
-    // Google Play Services Maps
+    // Google Maps
     implementation("com.google.android.gms:play-services-maps:18.1.0")
 
-    // **Google Maps Android Utils for clustering**
+    // Google Location Services (FusedLocationProviderClient)
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // Google Maps Utils (clustering, markers)
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
 
     // Testing

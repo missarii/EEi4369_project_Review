@@ -27,16 +27,19 @@ public class MotherHomePage extends AppCompatActivity {
     private TextView contentLabel;
     private int currentIndex = 0;
 
+    // Updated arrays: 4 options now
     private final int[] imageResIds = {
-            R.drawable.mother_baby_mother, // Index 0: “Mom & B Baby Health Report”
-            R.drawable.appoint_send,       // Index 1: “Appointment Booking”
-            R.drawable.bicycle_ride        // Index 2: “Bicycle Ride”
+            R.drawable.mother_baby_mother, // Index 0: Mom & Baby Health Report
+            R.drawable.appoint_send,       // Index 1: Appointment Booking
+            R.drawable.bicycle_ride,       // Index 2: MOH Locations
+            R.drawable.voicechat            // Index 3: Voice Chat
     };
 
     private final String[] imageLabels = {
-            "Mom & B Baby Health Report",
+            "Mom & Baby Health Report",
             "Appointment Booking",
-            "Locations"
+            "MOH Locations",
+            "Voice Chat"
     };
 
     private FirebaseAuth mAuth;
@@ -91,6 +94,7 @@ public class MotherHomePage extends AppCompatActivity {
         // Initialize slider content
         updateContentDisplay();
 
+        // Slider navigation
         leftArrow.setOnClickListener(v -> {
             currentIndex = (currentIndex - 1 + imageResIds.length) % imageResIds.length;
             updateContentDisplay();
@@ -101,22 +105,21 @@ public class MotherHomePage extends AppCompatActivity {
             updateContentDisplay();
         });
 
-        // When user taps the central image:
+        // When user taps the central image
         contentImage.setOnClickListener(v -> {
-            if (currentIndex == 0) {
-                // Index 0: “Mom & B Baby Health Report” -> HealthReportActivity
-                Intent intent = new Intent(MotherHomePage.this, HealthReportActivity.class);
-                startActivity(intent);
-
-            } else if (currentIndex == 1) {
-                // Index 1: Appointment Booking -> AppointmentSendActivity
-                Intent intent = new Intent(MotherHomePage.this, AppointmentSendActivity.class);
-                startActivity(intent);
-
-            } else if (currentIndex == 2) {
-                // Index 2: “Bicycle Ride” -> MapActivity
-                Intent intent = new Intent(MotherHomePage.this, MapActivity.class);
-                startActivity(intent);
+            switch (currentIndex) {
+                case 0:
+                    startActivity(new Intent(MotherHomePage.this, HealthReportActivity.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(MotherHomePage.this, AppointmentSendActivity.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(MotherHomePage.this, MapActivity.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(MotherHomePage.this, VoiceChatActivity.class));
+                    break;
             }
         });
     }

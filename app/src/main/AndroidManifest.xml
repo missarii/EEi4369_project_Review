@@ -2,9 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.s23001792.thiriposa">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Microphone permission for Voice Chat -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -14,12 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Thiriposa">
 
-        <!-- Google Maps API Key: replace YOUR_API_KEY_HERE with your actual key -->
+        <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBhiBspdv3ufHAEFk1Wn8VEJe3j9qzrrEo" />
 
-        <!-- Launches your MainActivity first -->
+        <!-- Main launcher activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -29,52 +33,38 @@
             </intent-filter>
         </activity>
 
-        <!-- Login screen -->
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
+        <!-- Login / Signup / Forgot Password -->
+        <activity android:name=".LoginActivity" android:exported="true" />
+        <activity android:name=".SignupActivity" android:exported="false" />
+        <activity android:name=".ForgotPasswordActivity" android:exported="false" />
 
-        <!-- Sign-up screen -->
-        <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
-
-        <!-- Forgot-password screen -->
-        <activity
-            android:name=".ForgotPasswordActivity"
-            android:exported="false" />
-
-        <!-- Role-based home pages -->
-        <activity
-            android:name=".MotherHomePage"
-            android:exported="false" />
-        <activity
-            android:name=".NurseHomePage"
-            android:exported="false" />
-        <activity
-            android:name=".MOHHomePage"
-            android:exported="false" />
+        <!-- Role-based Home Pages -->
+        <activity android:name=".MotherHomePage" android:exported="false" />
+        <activity android:name=".NurseHomePage" android:exported="false" />
+        <activity android:name=".MOHHomePage" android:exported="false" />
 
         <!-- Appointment screens -->
-        <activity
-            android:name=".AppointmentSendActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AppointmentReceiveActivity"
-            android:exported="false" />
+        <activity android:name=".AppointmentSendActivity" android:exported="false" />
+        <activity android:name=".AppointmentReceiveActivity" android:exported="false" />
 
         <!-- Health screens -->
-        <activity
-            android:name=".HealthUpdateActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HealthReportActivity"
-            android:exported="false" />
+        <activity android:name=".HealthUpdateActivity" android:exported="false" />
+        <activity android:name=".HealthReportActivity" android:exported="false" />
 
-        <!-- NEW: MapActivity for “Bicycle Ride” -->
-        <activity
-            android:name=".MapActivity"
-            android:exported="false" />
+        <!-- Map Activity with Location/GPS -->
+        <activity android:name=".MapActivity" android:exported="false" />
+
+        <!-- Packet screens -->
+        <activity android:name=".PacketUpdate" android:exported="false" />
+        <activity android:name=".PacketReport" android:exported="false" />
+        <activity android:name=".PacketReportData" android:exported="false" />
+
+        <!-- BMI data screen -->
+        <activity android:name=".BmiData" android:exported="false" />
+
+        <!-- Voice Chat Activity -->
+        <activity android:name=".VoiceChatActivity" android:exported="false" />
+
     </application>
 
 </manifest>

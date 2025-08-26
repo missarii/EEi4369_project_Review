@@ -1,81 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/subback1"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_centerInParent="true">
 
-        <!-- Booking Centre -->
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Booking Centre"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp" />
+            android:orientation="vertical"
+            android:background="@drawable/rounded_container"
+            android:elevation="4dp"
+            android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/centreSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1">
 
-        <!-- Home Nurse (now shows USERNAME instead of email) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Home Nurse"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp" />
+                <!-- Booking Centre -->
+                <TableRow>
+                    <TextView
+                        android:text="Booking Centre:"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black" />
+                    <Spinner
+                        android:id="@+id/centreSpinner"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
 
-        <Spinner
-            android:id="@+id/nurseSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <!-- Home Nurse -->
+                <TableRow>
+                    <TextView
+                        android:text="Home Nurse:"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black" />
+                    <Spinner
+                        android:id="@+id/nurseSpinner"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
 
-        <!-- Mother Full Name -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mother Full Name"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp" />
+                <!-- Mother Full Name -->
+                <TableRow>
+                    <TextView
+                        android:text="Mother's Name:"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black" />
+                    <EditText
+                        android:id="@+id/motherNameEt"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:hint="e.g. Jane Doe"
+                        android:inputType="textPersonName"
+                        android:background="@android:drawable/edit_text"
+                        android:padding="8dp" />
+                </TableRow>
 
-        <EditText
-            android:id="@+id/motherNameEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g. Jane Doe"
-            android:inputType="textPersonName" />
+                <!-- Baby Full Name -->
+                <TableRow>
+                    <TextView
+                        android:text="Baby's Name:"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black" />
+                    <EditText
+                        android:id="@+id/babyNameEt"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:hint="e.g. Baby Smith"
+                        android:inputType="textPersonName"
+                        android:background="@android:drawable/edit_text"
+                        android:padding="8dp" />
+                </TableRow>
 
-        <!-- Baby Full Name -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Baby Full Name"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp" />
+            </TableLayout>
 
-        <EditText
-            android:id="@+id/babyNameEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g. Baby Smith"
-            android:inputType="textPersonName" />
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="24dp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:padding="12dp" />
 
-        <!-- Submit Button -->
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp" />
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
